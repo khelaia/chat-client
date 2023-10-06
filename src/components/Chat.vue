@@ -48,7 +48,7 @@ const setupWebSocket = () => {
     status.value = "waiting"
   }
   messages.value = []
-  socket.value = new WebSocket('ws://localhost:8001/ws');
+  socket.value = new WebSocket('wss://server.talkin.ge/ws');
 
   socket.value.addEventListener('open', (event) => {
     console.log('WebSocket connection opened:', event);
