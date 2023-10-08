@@ -25,6 +25,7 @@ main {
   background: rgba(255,255,255,1);
   border-radius: 0.75rem;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .chat-box-header {
@@ -165,13 +166,10 @@ main {
 }
 
 @media screen and (max-width: 480px) {
-  .chat-box p {
-    font-size: 30px;
-  }
+
   .chat-input {
     width: 60%;
     float: left;
-    font-size: 28px;
   }
   .chat-submit {
     float: right;
