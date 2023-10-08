@@ -42,7 +42,6 @@ const sendTyping = () => {
   }
 }
 const setupWebSocket = () => {
-  // Replace 'ws://localhost:8080/ws' with your actual WebSocket endpoint
   if (socket.value){
     socket.value.close()
     status.value = "waiting"
