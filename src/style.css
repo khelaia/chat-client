@@ -7,7 +7,7 @@ body {
 }
 
 main {
-  max-width: 700px;
+  max-width: 1024px;
   margin: auto;
   height: 100vh;
   position: relative;
