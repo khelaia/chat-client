@@ -115,7 +115,7 @@ onMounted(()=>{
 
   <main id="main">
     <div class="chat-box-container">
-      <h1 class="chat-box-header">Privet.GE</h1>
+      <h1 class="chat-box-header"><img class="logo" src="/logo.png" /> <span class="logo-text">Privet.GE</span></h1>
       <div class="online__users"><span>{{onlineUsers}} Online</span></div>
       <div class="statusbar">
         <div class="left-status">
