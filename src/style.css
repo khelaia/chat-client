@@ -173,7 +173,9 @@ main {
 }
 
 @media screen and (max-width: 480px) {
-
+  .chat-box{
+    height: 440px;
+  }
   .chat-input {
     width: 60%;
     float: left;
