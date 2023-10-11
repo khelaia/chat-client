@@ -1,7 +1,7 @@
 <script setup>
 
 
-import {computed, onMounted, ref, watch} from "vue";
+import {computed, onBeforeMount, onMounted, ref, watch} from "vue";
 
 const messages = ref([]);
 const newMessage = ref('');
@@ -11,6 +11,8 @@ const chatBox = ref(null)
 const typing = ref(false)
 const typingInterval = ref(null)
 const onlineUsers = ref(0)
+const notificationSound = ref(new Audio('/notify.mp3'))
+const isTabActive = ref(true)
 const isConnected = computed({
   get(){
     return status.value === "connected"
@@ -73,13 +75,23 @@ const setupWebSocket = () => {
       const message = {class:"partner", text:parseMessage.text, date: new Date().toLocaleString()}
       messages.value.push(message);
     }
-    scrollToBottom()
+    if(typeof parseMessage.data && parseMessage.data !== "typing" && !parseMessage.online){
+      scrollToBottom()
+      playNotificationSound()
+    }
+    
     
   });
 
   socket.value.addEventListener('close', (event) => {
     console.log('WebSocket connection closed:', event);
   });
+}
+const playNotificationSound = () => {
+  if(isTabActive.value)return;
+  notificationSound.value.pause();
+  notificationSound.value.currentTime = 0
+  notificationSound.value.play()
 }
 const sendMessage = () => {
   if (!isConnected.value)return
@@ -100,12 +112,15 @@ const scrollToBottom = () => {
   },10)
 }
 
-
 onMounted(()=>{
   setupWebSocket();
 })
 
-
+onBeforeMount(()=>{
+  document.addEventListener("visibilitychange", function() {
+    isTabActive.value = !document.hidden;
+  });
+})
 
 </script>
 
@@ -133,7 +148,7 @@ onMounted(()=>{
           <span :class="`${message.class}-date`">{{ message.date }}</span>
         </div>
       </div>
-      <div v-if="typing" class="typing">Typing...</div>
+      <div v-if="typing || true" class="typing">Typing...</div>
       <div class="chat-input-container">
         <input class="chat-input" type="text" v-model="newMessage" @keyup.enter="sendMessage" @input="sendTyping">
         <button class="chat-submit" type="button" name="submit" @click="sendMessage" :disabled="!isConnected">SEND</button>

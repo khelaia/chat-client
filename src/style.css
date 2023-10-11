@@ -46,7 +46,7 @@ main {
   background-color: #FFF;
   overflow-y: scroll;
   border-radius: 10px;
-  padding: 10px;
+  padding: 25px 10px;
   position: relative;
   height: 700px;
 }
@@ -295,7 +295,7 @@ main {
 
 .typing{
   position: absolute;
-  bottom: 90px;
+  bottom: 80px;
   left: 35px;
   font-size: 14px;
 }
