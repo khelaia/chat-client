@@ -128,11 +128,9 @@ onBeforeMount(()=>{
 
   <main id="main">
     <div class="ad">
-        <iframe data-aa='2267050' src='//ad.a-ads.com/2267050?size=728x90' style='width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-      </div>
-      <div class="ad-mobile">
-        <iframe data-aa='2267053' src='//ad.a-ads.com/2267053?size=300x250' style='width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color: transparent;'></iframe>
-      </div>
+      <iframe data-aa='2267055' src='//acceptable.a-ads.com/2267055' style='border:0px; padding:0; width:100%; height:100%; overflow:hidden; background-color: transparent;'></iframe>
+
+    </div>
     <div class="chat-box-container">
       <h1 class="chat-box-header"><img class="logo" src="/logo.png" /> <span class="logo-text">Privet.GE</span></h1>
       
