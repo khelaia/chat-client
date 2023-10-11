@@ -148,7 +148,7 @@ onBeforeMount(()=>{
           <span :class="`${message.class}-date`">{{ message.date }}</span>
         </div>
       </div>
-      <div v-if="typing || true" class="typing">Typing...</div>
+      <div v-if="typing" class="typing">Typing...</div>
       <div class="chat-input-container">
         <input class="chat-input" type="text" v-model="newMessage" @keyup.enter="sendMessage" @input="sendTyping">
         <button class="chat-submit" type="button" name="submit" @click="sendMessage" :disabled="!isConnected">SEND</button>
