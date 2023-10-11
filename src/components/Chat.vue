@@ -109,7 +109,7 @@ const scrollToBottom = () => {
   setTimeout(()=>{
     let elem = document.querySelector("#main > div > div.chat-box .message-container:last-child")
     if (elem) elem.scrollIntoView({behavior: 'smooth'});
-  },10)
+  },100)
 }
 
 onMounted(()=>{
