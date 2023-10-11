@@ -28,6 +28,7 @@ main {
   border-radius: 0.75rem;
   padding: 1rem;
   box-sizing: border-box;
+  position: relative;
 }
 
 .chat-box-header {
@@ -47,6 +48,7 @@ main {
   border-radius: 10px;
   padding: 10px;
   position: relative;
+  height: 700px;
 }
 
 
@@ -293,8 +295,8 @@ main {
 
 .typing{
   position: absolute;
-  bottom: 5px;
-  left: 10px;
+  bottom: 90px;
+  left: 35px;
   font-size: 14px;
 }
 .online__users{

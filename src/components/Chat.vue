@@ -60,22 +60,21 @@ const setupWebSocket = () => {
       messages.value = []
       const message = {class:"green system", text:"Partner Connected", date: new Date().toLocaleString()}
       messages.value.push(message);
-      return
     }else if (typeof parseMessage.data && parseMessage.data === "partner_disconnected"){
       status.value = "disconnected"
       const message = {class:"system", text:"Partner Disconnected", date: new Date().toLocaleString()}
       messages.value.push(message);
       socket.value.close()
-      return
     }else if(typeof parseMessage.data && parseMessage.data === "typing"){
       makeTyping()
-      return;
     }else if(typeof parseMessage.online && parseMessage.online){
       onlineUsers.value = parseMessage.data
     }else{
       const message = {class:"partner", text:parseMessage.text, date: new Date().toLocaleString()}
       messages.value.push(message);
     }
+    scrollToBottom()
+    
   });
 
   socket.value.addEventListener('close', (event) => {
@@ -91,17 +90,16 @@ const sendMessage = () => {
     socket.value.send(JSON.stringify({ text: newMessage.value }));
     newMessage.value = '';
   }
+  scrollToBottom()
 }
 
 const scrollToBottom = () => {
   setTimeout(()=>{
-    chatBox.value.scrollTo(0, chatBox.value.scrollHeight)
-  },100)
+    let elem = document.querySelector("#main > div > div.chat-box .message-container:last-child")
+    if (elem) elem.scrollIntoView({behavior: 'smooth'});
+  },10)
 }
 
-watch(messages.value, ()=>{
-  scrollToBottom()
-}, {immediate: false})
 
 onMounted(()=>{
   setupWebSocket();
@@ -128,7 +126,6 @@ onMounted(()=>{
       </div>
       <div class="chat-box" ref="chatBox">
         <div v-if="status === 'waiting'" class="lds-ripple"><div></div><div></div></div>
-        <div v-if="typing" class="typing">Typing...</div>
         <div class="message-container" v-for="(message, index) in messages" :key="index">
           <div :class="message.class">
             <p>{{message.text}}</p>
@@ -136,6 +133,7 @@ onMounted(()=>{
           <span :class="`${message.class}-date`">{{ message.date }}</span>
         </div>
       </div>
+      <div v-if="typing" class="typing">Typing...</div>
       <div class="chat-input-container">
         <input class="chat-input" type="text" v-model="newMessage" @keyup.enter="sendMessage" @input="sendTyping">
         <button class="chat-submit" type="button" name="submit" @click="sendMessage" :disabled="!isConnected">SEND</button>
